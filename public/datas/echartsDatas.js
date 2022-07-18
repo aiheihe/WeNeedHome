@@ -967,6 +967,9 @@ window.echartsDatas = [
                         name: '恒大悦龙台',
                     },
                     {
+                        name: '赫石府',
+                    },
+                    {
                         name: '恒大时代新城',
                         month: 8,
                     },
