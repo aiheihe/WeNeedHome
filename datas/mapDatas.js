@@ -1833,6 +1833,14 @@ window.mapDatas = [
         geocode: '[{"formatted_address":"河北省石家庄市元氏县恒大悦龙台(建设中)","country":"中国","province":"河北省","citycode":"0311","city":"石家庄市","district":"元氏县","township":[],"neighborhood":{"name":[],"type":[]},"building":{"name":[],"type":[]},"adcode":"130132","street":[],"number":[],"location":"114.369080,37.885237","level":"兴趣点"}]',
     },
     {
+        name: '河北省石家庄市长安区赫石府',
+        month: '',
+        link: '',
+        lng: '114.556349',
+        lat: '38.099564',
+        geocode: '',
+    },
+    {
         name: '广西壮族自治区桂林市融创文旅城N7地块',
         month: 10,
         link: 'https://raw.githubusercontent.com/WeNeedHome/SummaryOfLoanSuspension/main/images/广西/桂林融创N7.png',
