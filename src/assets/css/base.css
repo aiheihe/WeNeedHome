@@ -48,3 +48,17 @@ a {
 .mapboxgl-popup-close-button {
     display: none;
 }
+
+.el-table {
+  border-radius: 5px;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 20%);
+   border: #85CEFF 1px solid;
+}
+
+.el-drawer__header {
+  padding: 0;
+  margin-bottom: 0px;
+}
+.el-drawer__body {
+  padding: 5px;
+}

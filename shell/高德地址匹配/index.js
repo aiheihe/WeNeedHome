@@ -4,19 +4,29 @@ const axios = require('axios')
 
 const fs = require('fs')
 
-let { houseData } = require('./data.js')
+let houseData = require('./data.json')
 
+// console.log(houseData)
 let address = []
 houseData.forEach(item => {
     item.children.forEach(si => {
         si.children.forEach(sii => {
-            address.push(`${item.title}${si.title}${sii}`)
+            address.push({
+                name: `${item.name}${si.name}${sii.name}`,
+                month: sii.month || '',
+                link: sii.link || '',
+            })
         })
     })
 })
+console.log('address', address.length)
+address = address.slice(200, 300)
+console.log('address---', address.length)
+fs.writeFileSync('address-list.json', JSON.stringify(address, null, 4))
 const result = []
 address.forEach(async (item, index) => {
-    let { data } = await axios.get(`${GD_API}${encodeURI(item)}`)
+    let { data } = await axios.get(`${GD_API}${encodeURI(item.name)}`)
+    console.log(`${GD_API}${encodeURI(item.name)}`)
     const { geocodes } = data
     if (!geocodes) {
         return
@@ -24,7 +34,7 @@ address.forEach(async (item, index) => {
     const { location } = geocodes[0]
     const longitudeAndLatitude = location.split(',')
     let obj = {
-        address: item,
+        ...item,
     }
     if (data.info === 'OK') {
         obj.lng = longitudeAndLatitude[0]
@@ -33,6 +43,7 @@ address.forEach(async (item, index) => {
     }
     result.push(obj)
     if (index === address.length - 1) {
-        fs.writeFileSync('outputData.json', JSON.stringify(result, null, 4))
+        console.log('result length', result.length)
+        fs.writeFileSync('outputData3.json', JSON.stringify(result, null, 4))
     }
 })

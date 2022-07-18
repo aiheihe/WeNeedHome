@@ -4,18 +4,19 @@
 
 <script lang="ts" setup>
 import * as echarts from 'echarts'
-import { Ref, ref, onMounted } from 'vue'
-import HouseData from './countData'
+import { onMounted } from 'vue'
+import { EchartData } from '/#/index'
 
+let HouseData:Array<EchartData> = window.echartsDatas
 let currentTitle = ''
 let chart = null
-let xAsixData = []
+let xAsixData: Array<string> = []
 let valueData = []
 HouseData.forEach((item) => {
-    xAsixData.push(item.title)
+    xAsixData.push(item.name)
     valueData.push({
         value: item.count,
-        groupId: item.title,
+        groupId: item.name,
     })
 })
 let options = {
@@ -26,23 +27,25 @@ let options = {
         },
         formatter(params) {
             if (currentTitle) {
-                let data = HouseData.find((item) => item.title === currentTitle)
+                let data = HouseData.find((item) => item.name === currentTitle)
                 if (!data) return
-                let data1 = data.children.find((item) => item.title === params[0].name)
+                let data1 = data.children.find((item) => item.name === params[0].name)
                 if (!data1) return
 
                 let str = params[0].name + '：</br> '
                 data1.children.forEach((item) => {
-                    str += `${item}</br> `
+                    str += `${item.name}</br> `
                 })
                 return str
             }
-            let data = HouseData.find((item) => item.title === params[0].name)
+            let data = HouseData.find((item) => item.name === params[0].name)
             if (!data) return
             let str = params[0].name + '：</br> '
-            data.children.forEach((item) => {
-                str += `${item.title}：${item.children.length} </br> `
-            })
+            if (data.children) {
+                data.children.forEach((item) => {
+                    str += `${item.name}：${item.children.length} </br> `
+                }) 
+            }
             return str
         },
     },
@@ -93,16 +96,16 @@ onMounted(() => {
     options.series.data = valueData
     chart.setOption(options)
     chart.on('click', (event) => {
-        let data = HouseData.find((item) => item.title === event.name)
+        let data = HouseData.find((item) => item.name === event.name)
         if (!data) return
         currentTitle = event.name
         xAsixData = []
         valueData = []
         data.children.forEach((item) => {
-            xAsixData.push(item.title)
+            xAsixData.push(item.name)
             valueData.push({
                 value: item.children.length,
-                groupId: item.title,
+                groupId: item.name,
             })
         })
         options.xAxis.data = xAsixData
@@ -118,7 +121,7 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .chart {
-  width: 600px;
+  width: 650px;
   height: 300px;
   border: #85CEFF 1px solid;
   border-radius: 10px;

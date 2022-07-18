@@ -5,6 +5,10 @@
 declare module 'vue' {
   export interface GlobalComponents {
     CountStats: typeof import('./src/components/CountStats.vue')['default']
+    ElIcon: typeof import('element-plus/es')['ElIcon']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     Footer: typeof import('./src/components/Footer.vue')['default']
     Map: typeof import('./src/components/map/Map.vue')['default']
   }
