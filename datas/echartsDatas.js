@@ -867,6 +867,9 @@ window.echartsDatas = [
                         name: '西安沣东新城君合天玺',
                         link: 'https://raw.githubusercontent.com/WeNeedHome/SummaryOfLoanSuspension/main/images/西安沣东新城君合天玺.jpeg',
                     },
+                    {
+                        name: '19.西安融创东方宸院',
+                    },
                 ],
             },
             {
